@@ -1,10 +1,17 @@
 import sys
+import os
 import math
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
-form_class = uic.loadUiType("cal_gui.ui")[0]
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
+form = resource_path('cal_gui.ui')
+form_class = uic.loadUiType(form)[0]
 
 class WindowClass(QMainWindow, form_class) :
     num1, num2, opt = '0', '0', ''
